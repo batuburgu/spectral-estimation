@@ -1,4 +1,4 @@
-time_domain = linspace(-5, 5, 4001); % Time domain
+time_domain = linspace(0, 5, 4001); % Time domain
 fs = 1 / (time_domain(2) - time_domain(1)); % Sampling frequency
 
 hamming_window_length = 4000; 
@@ -19,19 +19,19 @@ noisy_signal_2_0dB = awgn(sampled_sinusoidal_2, 0);
 noisy_signal_2_m10dB = awgn(sampled_sinusoidal_2, -10);
 
 % Periodogram Calculations
-[perio_freq_domain_1, periodogram_1_10dB] = periodogram_function(noisy_signal_1_10dB, fs);
-[perio_freq_domain_2, periodogram_1_0dB] = periodogram_function(noisy_signal_1_0dB, fs);
-[perio_freq_domain_3, periodogram_1_m10dB] = periodogram_function(noisy_signal_1_m10dB, fs);
+[perio_freq_domain_1, periodogram__PSD_1_10dB] = periodogram_function(noisy_signal_1_10dB, fs);
+[perio_freq_domain_2, periodogram__PSD_1_0dB] = periodogram_function(noisy_signal_1_0dB, fs);
+[perio_freq_domain_3, periodogram__PSD_1_m10dB] = periodogram_function(noisy_signal_1_m10dB, fs);
 
-[perio_freq_domain_4, periodogram_2_10dB] = periodogram_function(noisy_signal_2_10dB, fs);
-[perio_freq_domain_5, periodogram_2_0dB] = periodogram_function(noisy_signal_2_0dB, fs);
-[perio_freq_domain_6, periodogram_2_m10dB] = periodogram_function(noisy_signal_2_m10dB, fs);
+[perio_freq_domain_4, periodogram_PSD_2_10dB] = periodogram_function(noisy_signal_2_10dB, fs);
+[perio_freq_domain_5, periodogram_PSD_2_0dB] = periodogram_function(noisy_signal_2_0dB, fs);
+[perio_freq_domain_6, periodogram_PSD_2_m10dB] = periodogram_function(noisy_signal_2_m10dB, fs);
 
 % Plot for Signal 1 with SNR = +10 dB
 figure(1);
-plot(perio_freq_domain_1, periodogram_1_10dB,'Color','blue');
+plot(perio_freq_domain_1, periodogram__PSD_1_10dB,'Color','blue');
 hold on
-plot(-perio_freq_domain_1, periodogram_1_10dB,'Color','blue');
+plot(-perio_freq_domain_1, periodogram__PSD_1_10dB,'Color','blue');
 title('Periodogram Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -39,9 +39,9 @@ legend('Signal 1 with SNR = 10dB')
 
 % Plot for Signal 1 with SNR = 0 dB
 figure(2);
-plot(perio_freq_domain_2, periodogram_1_0dB,'Color','blue');
+plot(perio_freq_domain_2, periodogram__PSD_1_0dB,'Color','blue');
 hold on
-plot(-perio_freq_domain_2, periodogram_1_0dB,'Color','blue');
+plot(-perio_freq_domain_2, periodogram__PSD_1_0dB,'Color','blue');
 title('Periodogram Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -49,9 +49,9 @@ legend('Signal 1 with SNR = 0dB')
 
 % Plot for Signal 1 with SNR = -10 dB
 figure(3);
-plot(perio_freq_domain_3, periodogram_1_m10dB,'Color','blue');
+plot(perio_freq_domain_3, periodogram__PSD_1_m10dB,'Color','blue');
 hold on
-plot(-perio_freq_domain_3, periodogram_1_m10dB,'Color','blue');
+plot(-perio_freq_domain_3, periodogram__PSD_1_m10dB,'Color','blue');
 title('Periodogram Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -60,9 +60,9 @@ legend('Signal 1 with SNR = -10dB')
 
 % Plot for Signal 2 with SNR = +10 dB
 figure(4);
-plot(perio_freq_domain_4, periodogram_2_10dB,'Color','blue');
+plot(perio_freq_domain_4, periodogram_PSD_2_10dB,'Color','blue');
 hold on
-plot(-perio_freq_domain_4, periodogram_2_10dB,'Color','blue');
+plot(-perio_freq_domain_4, periodogram_PSD_2_10dB,'Color','blue');
 title('Periodogram Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -70,9 +70,9 @@ legend('Signal 2 with SNR = 10dB')
 
 % Plot for Signal 2 with SNR = 0 dB
 figure(5);
-plot(perio_freq_domain_5, periodogram_2_0dB,'Color','red');
+plot(perio_freq_domain_5, periodogram_PSD_2_0dB,'Color','red');
 hold on
-plot(-perio_freq_domain_5, periodogram_2_0dB,'Color','red');
+plot(-perio_freq_domain_5, periodogram_PSD_2_0dB,'Color','red');
 title('Periodogram Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -80,28 +80,28 @@ legend('Signal 2 with SNR = 0dB')
 
 % Plot for Signal 1 with SNR = -10 dB
 figure(6);
-plot(perio_freq_domain_6, periodogram_2_m10dB,'Color','black');
+plot(perio_freq_domain_6, periodogram_PSD_2_m10dB,'Color','black');
 hold on
-plot(-perio_freq_domain_6, periodogram_2_m10dB,'Color','black');
+plot(-perio_freq_domain_6, periodogram_PSD_2_m10dB,'Color','black');
 title('Periodogram Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
 legend('Signal 2 with SNR = -10dB')
 
 %Welch's Method Calculations
-[welchs_freq_domain_1, welchs_power_1_10dB] = welchs_function(noisy_signal_1_10dB, fs, hamming_window_length, hamming_window_length/2);
-[welchs_freq_domain_2, welchs_power_1_0dB] = welchs_function(noisy_signal_1_0dB, fs, hamming_window_length, hamming_window_length/2);
-[welchs_freq_domain_3, welchs_power_1_m10dB] = welchs_function(noisy_signal_1_m10dB, fs, hamming_window_length, hamming_window_length/2);
+[welchs_freq_domain_1, welchs_PSD_1_10dB] = welchs_function(noisy_signal_1_10dB, fs, hamming_window_length, hamming_window_length/2);
+[welchs_freq_domain_2, welchs_PSD_1_0dB] = welchs_function(noisy_signal_1_0dB, fs, hamming_window_length, hamming_window_length/2);
+[welchs_freq_domain_3, welchs_PSD_1_m10dB] = welchs_function(noisy_signal_1_m10dB, fs, hamming_window_length, hamming_window_length/2);
 
-[welchs_freq_domain_4, welchs_power_2_10dB] = welchs_function(noisy_signal_2_10dB, fs, hamming_window_length, hamming_window_length/2);
-[welchs_freq_domain_5, welchs_power_2_0dB] = welchs_function(noisy_signal_2_0dB, fs, hamming_window_length, hamming_window_length/2);
-[welchs_freq_domain_6, welchs_power_2_m10dB] = welchs_function(noisy_signal_2_m10dB, fs, hamming_window_length, hamming_window_length/2);
+[welchs_freq_domain_4, welchs_PSD_2_10dB] = welchs_function(noisy_signal_2_10dB, fs, hamming_window_length, hamming_window_length/2);
+[welchs_freq_domain_5, welchs_PSD_2_0dB] = welchs_function(noisy_signal_2_0dB, fs, hamming_window_length, hamming_window_length/2);
+[welchs_freq_domain_6, welchs_PSD_2_m10dB] = welchs_function(noisy_signal_2_m10dB, fs, hamming_window_length, hamming_window_length/2);
 
 % Plot for Signal 1 with SNR = +10 dB
 figure(7);
-plot(welchs_freq_domain_1, welchs_power_1_10dB,'Color','red');
+plot(welchs_freq_domain_1, welchs_PSD_1_10dB,'Color','red');
 hold on
-plot(-welchs_freq_domain_1, welchs_power_1_10dB,'Color','red');
+plot(-welchs_freq_domain_1, welchs_PSD_1_10dB,'Color','red');
 title('Welchs Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -109,9 +109,9 @@ legend('Signal 1 with SNR = 10dB')
 
 % Plot for Signal 1 with SNR = 0 dB
 figure(8);
-plot(welchs_freq_domain_2, welchs_power_1_0dB,'Color','red');
+plot(welchs_freq_domain_2, welchs_PSD_1_0dB,'Color','red');
 hold on
-plot(-welchs_freq_domain_2, welchs_power_1_0dB,'Color','red');
+plot(-welchs_freq_domain_2, welchs_PSD_1_0dB,'Color','red');
 title('Welchs Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -119,9 +119,9 @@ legend('Signal 1 with SNR = 0dB')
 
 % Plot for Signal 1 with SNR = -10 dB
 figure(9);
-plot(welchs_freq_domain_3, welchs_power_1_m10dB,'Color','red');
+plot(welchs_freq_domain_3, welchs_PSD_1_m10dB,'Color','red');
 hold on
-plot(-welchs_freq_domain_3, welchs_power_1_m10dB,'Color','red');
+plot(-welchs_freq_domain_3, welchs_PSD_1_m10dB,'Color','red');
 title('Welchs Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -129,9 +129,9 @@ legend('Signal 1 with SNR = -10dB')
 
 % Plot for Signal 2 with SNR = +10 dB
 figure(10);
-plot(welchs_freq_domain_4, welchs_power_2_10dB,'Color','red');
+plot(welchs_freq_domain_4, welchs_PSD_2_10dB,'Color','red');
 hold on
-plot(-welchs_freq_domain_4, welchs_power_2_10dB,'Color','red');
+plot(-welchs_freq_domain_4, welchs_PSD_2_10dB,'Color','red');
 title('Welchs Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -139,9 +139,9 @@ legend('Signal 2 with SNR = 10dB')
 
 % Plot for Signal 2 with SNR = 0 dB
 figure(11);
-plot(welchs_freq_domain_5, welchs_power_2_0dB,'Color','red');
+plot(welchs_freq_domain_5, welchs_PSD_2_0dB,'Color','red');
 hold on
-plot(-welchs_freq_domain_5, welchs_power_2_0dB,'Color','red');
+plot(-welchs_freq_domain_5, welchs_PSD_2_0dB,'Color','red');
 title('Welchs Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -149,28 +149,28 @@ legend('Signal 2 with SNR = 0dB')
 
 % Plot for Signal 2 with SNR = -10 dB
 figure(12);
-plot(welchs_freq_domain_6, welchs_power_2_m10dB,'Color','red');
+plot(welchs_freq_domain_6, welchs_PSD_2_m10dB,'Color','red');
 hold on
-plot(-welchs_freq_domain_6, welchs_power_2_m10dB,'Color','red');
+plot(-welchs_freq_domain_6, welchs_PSD_2_m10dB,'Color','red');
 title('Welchs Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
 legend('Signal 2 with SNR = -10dB')
 
 % Blackman-Tukey Calculations
-[blackman_freq_domain_1, blackman_power_1_10dB] = blackman_tukey_function(noisy_signal_1_10dB, fs, blackman_window_length, blackman_window_length/2);
-[blackman_freq_domain_2, blackman_power_1_0dB] = blackman_tukey_function(noisy_signal_1_0dB, fs, blackman_window_length, blackman_window_length/2);
-[blackman_freq_domain_3, blackman_power_1_m10dB] = blackman_tukey_function(noisy_signal_1_m10dB, fs, blackman_window_length, blackman_window_length/2);
+[blackman_freq_domain_1, blackman_PSD_1_10dB] = blackman_tukey_function(noisy_signal_1_10dB, fs, blackman_window_length, blackman_window_length/2);
+[blackman_freq_domain_2, blackman_PSD_1_0dB] = blackman_tukey_function(noisy_signal_1_0dB, fs, blackman_window_length, blackman_window_length/2);
+[blackman_freq_domain_3, blackman_PSD_1_m10dB] = blackman_tukey_function(noisy_signal_1_m10dB, fs, blackman_window_length, blackman_window_length/2);
 
-[blackman_freq_domain_4, blackman_power_2_10dB] = blackman_tukey_function(noisy_signal_2_10dB, fs, blackman_window_length, blackman_window_length/2);
-[blackman_freq_domain_5, blackman_power_2_0dB] = blackman_tukey_function(noisy_signal_2_0dB, fs, blackman_window_length, blackman_window_length/2);
-[blackman_freq_domain_6, blackman_power_2_m10dB] = blackman_tukey_function(noisy_signal_2_m10dB, fs, blackman_window_length, blackman_window_length/2);
+[blackman_freq_domain_4, blackman_PSD_2_10dB] = blackman_tukey_function(noisy_signal_2_10dB, fs, blackman_window_length, blackman_window_length/2);
+[blackman_freq_domain_5, blackman_PSD_2_0dB] = blackman_tukey_function(noisy_signal_2_0dB, fs, blackman_window_length, blackman_window_length/2);
+[blackman_freq_domain_6, blackman_PSD_2_m10dB] = blackman_tukey_function(noisy_signal_2_m10dB, fs, blackman_window_length, blackman_window_length/2);
 
 % Plot for Signal 1 with SNR = +10 dB
 figure(13);
-plot(blackman_freq_domain_1, blackman_power_1_10dB,'Color','black');
+plot(blackman_freq_domain_1, blackman_PSD_1_10dB,'Color','black');
 hold on
-plot(-blackman_freq_domain_1, blackman_power_1_10dB,'Color','black');
+plot(-blackman_freq_domain_1, blackman_PSD_1_10dB,'Color','black');
 title('Blackman-Tukey Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -178,9 +178,9 @@ legend('Signal 1 with SNR = 10dB')
 
 % Plot for Signal 1 with SNR = 0 dB
 figure(14);
-plot(blackman_freq_domain_2, blackman_power_1_0dB,'Color','black');
+plot(blackman_freq_domain_2, blackman_PSD_1_0dB,'Color','black');
 hold on
-plot(-blackman_freq_domain_2, blackman_power_1_0dB,'Color','black');
+plot(-blackman_freq_domain_2, blackman_PSD_1_0dB,'Color','black');
 title('Blackman-Tukey Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -188,9 +188,9 @@ legend('Signal 1 with SNR = 0dB')
 
 % Plot for Signal 1 with SNR = -10 dB
 figure(15);
-plot(blackman_freq_domain_3, blackman_power_1_m10dB,'Color','black');
+plot(blackman_freq_domain_3, blackman_PSD_1_m10dB,'Color','black');
 hold on
-plot(-blackman_freq_domain_3, blackman_power_1_m10dB,'Color','black');
+plot(-blackman_freq_domain_3, blackman_PSD_1_m10dB,'Color','black');
 title('Blackman-Tukey Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -198,9 +198,9 @@ legend('Signal 1 with SNR = -10dB')
 
 % Plot for Signal 2 with SNR = 10 dB
 figure(16);
-plot(blackman_freq_domain_4, blackman_power_2_10dB,'Color','black');
+plot(blackman_freq_domain_4, blackman_PSD_2_10dB,'Color','black');
 hold on
-plot(-blackman_freq_domain_4, blackman_power_2_10dB,'Color','black');
+plot(-blackman_freq_domain_4, blackman_PSD_2_10dB,'Color','black');
 title('Blackman-Tukey Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -208,9 +208,9 @@ legend('Signal 2 with SNR = 10dB')
 
 % Plot for Signal 2 with SNR = 0 dB
 figure(17);
-plot(blackman_freq_domain_5, blackman_power_2_0dB,'Color','black');
+plot(blackman_freq_domain_5, blackman_PSD_2_0dB,'Color','black');
 hold on
-plot(-blackman_freq_domain_5, blackman_power_2_0dB,'Color','black');
+plot(-blackman_freq_domain_5, blackman_PSD_2_0dB,'Color','black');
 title('Blackman-Tukey Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
@@ -218,28 +218,28 @@ legend('Signal 1 with SNR = 0dB')
 
 % Plot for Signal 2 with SNR = -10 dB
 figure(18);
-plot(blackman_freq_domain_6, blackman_power_2_m10dB,'Color','black');
+plot(blackman_freq_domain_6, blackman_PSD_2_m10dB,'Color','black');
 hold on
-plot(-blackman_freq_domain_6, blackman_power_2_m10dB,'Color','black');
+plot(-blackman_freq_domain_6, blackman_PSD_2_m10dB,'Color','black');
 title('Blackman-Tukey Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
 legend('Signal 1 with SNR = -10dB')
 
 % AR (Autoregressive) Model Calculations
-[ar_freq_domain_1, ar_power_1_10dB] = AR_function(noisy_signal_1_10dB, fs, ar_order);
-[ar_freq_domain_2, ar_power_1_0dB] = AR_function(noisy_signal_1_0dB, fs, ar_order);
-[ar_freq_domain_3, ar_power_1_m10dB] = AR_function(noisy_signal_1_m10dB, fs, ar_order);
+[ar_freq_domain_1, ar_PSD_1_10dB] = AR_function(noisy_signal_1_10dB, fs, ar_order);
+[ar_freq_domain_2, ar_PSD_1_0dB] = AR_function(noisy_signal_1_0dB, fs, ar_order);
+[ar_freq_domain_3, ar_PSD_1_m10dB] = AR_function(noisy_signal_1_m10dB, fs, ar_order);
 
-[ar_freq_domain_4, ar_power_2_10dB] = AR_function(noisy_signal_2_10dB, fs, ar_order);
-[ar_freq_domain_5, ar_power_2_0dB] = AR_function(noisy_signal_2_0dB, fs, ar_order);
-[ar_freq_domain_6, ar_power_2_m10dB] = AR_function(noisy_signal_2_m10dB, fs, ar_order);
+[ar_freq_domain_4, ar_PSD_2_10dB] = AR_function(noisy_signal_2_10dB, fs, ar_order);
+[ar_freq_domain_5, ar_PSD_2_0dB] = AR_function(noisy_signal_2_0dB, fs, ar_order);
+[ar_freq_domain_6, ar_PSD_2_m10dB] = AR_function(noisy_signal_2_m10dB, fs, ar_order);
 
 % Plot for Signal 1 with SNR = 10dB
 figure(19);
-plot(ar_freq_domain_1, ar_power_1_10dB);
+plot(ar_freq_domain_1, ar_PSD_1_10dB);
 hold on
-plot(-ar_freq_domain_1, ar_power_1_10dB);
+plot(-ar_freq_domain_1, ar_PSD_1_10dB);
 title('Autoregressive Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -247,9 +247,9 @@ legend('Signal 1 with SNR = 10dB')
 
 % Plot for Signal 1 with SNR = 0dB
 figure(20);
-plot(ar_freq_domain_2, ar_power_1_0dB, 'Color', 'magenta');
+plot(ar_freq_domain_2, ar_PSD_1_0dB, 'Color', 'magenta');
 hold on
-plot(-ar_freq_domain_2, ar_power_1_0dB, 'Color', 'magenta');
+plot(-ar_freq_domain_2, ar_PSD_1_0dB, 'Color', 'magenta');
 title('Autoregressive Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -257,9 +257,9 @@ legend('Signal 1 with SNR = 0dB')
 
 % Plot for Signal 1 with SNR = -10dB
 figure(21);
-plot(ar_freq_domain_3, ar_power_1_m10dB, 'Color', 'magenta');
+plot(ar_freq_domain_3, ar_PSD_1_m10dB, 'Color', 'magenta');
 hold on
-plot(-ar_freq_domain_3, ar_power_1_m10dB, 'Color', 'magenta');
+plot(-ar_freq_domain_3, ar_PSD_1_m10dB, 'Color', 'magenta');
 title('Autoregressive Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -267,9 +267,9 @@ legend('Signal 1 with SNR = -10dB')
 
 % Plot for Signal 2 with SNR = 10dB
 figure(22);
-plot(ar_freq_domain_4, ar_power_2_10dB, 'Color', 'magenta');
+plot(ar_freq_domain_4, ar_PSD_2_10dB, 'Color', 'magenta');
 hold on
-plot(-ar_freq_domain_4, ar_power_2_10dB, 'Color', 'magenta');
+plot(-ar_freq_domain_4, ar_PSD_2_10dB, 'Color', 'magenta');
 title('Autoregressive Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -277,9 +277,9 @@ legend('Signal 2 with SNR = 10dB')
 
 % Plot for Signal 2 with SNR = 0dB
 figure(23);
-plot(ar_freq_domain_5, ar_power_2_0dB, 'Color', 'magenta');
+plot(ar_freq_domain_5, ar_PSD_2_0dB, 'Color', 'magenta');
 hold on
-plot(-ar_freq_domain_5, ar_power_2_0dB, 'Color', 'magenta');
+plot(-ar_freq_domain_5, ar_PSD_2_0dB, 'Color', 'magenta');
 title('Autoregressive Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -287,28 +287,28 @@ legend('Signal 2 with SNR = 0dB')
 
 % Plot for Signal 2 with SNR = -10dB
 figure(24);
-plot(ar_freq_domain_6, ar_power_2_m10dB, 'Color', 'magenta');
+plot(ar_freq_domain_6, ar_PSD_2_m10dB, 'Color', 'magenta');
 hold on
-plot(-ar_freq_domain_6, ar_power_2_m10dB, 'Color', 'magenta');
+plot(-ar_freq_domain_6, ar_PSD_2_m10dB, 'Color', 'magenta');
 title('Autoregressive Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
 legend('Signal 2 with SNR = -10dB')
 
 % MA (Moving Average) Model Calculations
-[ma_freq_domain_1, ma_power_1_10dB] = MA_function(noisy_signal_1_10dB, fs, MA_window_length);
-[ma_freq_domain_2, ma_power_1_0dB] = MA_function(noisy_signal_1_0dB, fs, MA_window_length);
-[ma_freq_domain_3, ma_power_1_m10dB] = MA_function(noisy_signal_1_m10dB, fs, MA_window_length);
+[ma_freq_domain_1, ma_PSD_1_10dB] = MA_function(noisy_signal_1_10dB, fs, MA_window_length);
+[ma_freq_domain_2, ma_PSD_1_0dB] = MA_function(noisy_signal_1_0dB, fs, MA_window_length);
+[ma_freq_domain_3, ma_PSD_1_m10dB] = MA_function(noisy_signal_1_m10dB, fs, MA_window_length);
 
-[ma_freq_domain_4, ma_power_2_10dB] = MA_function(noisy_signal_2_10dB, fs, MA_window_length);
-[ma_freq_domain_5, ma_power_2_0dB] = MA_function(noisy_signal_2_0dB, fs, MA_window_length);
-[ma_freq_domain_6, ma_power_2_m10dB] = MA_function(noisy_signal_2_m10dB, fs, MA_window_length);
+[ma_freq_domain_4, ma_PSD_2_10dB] = MA_function(noisy_signal_2_10dB, fs, MA_window_length);
+[ma_freq_domain_5, ma_PSD_2_0dB] = MA_function(noisy_signal_2_0dB, fs, MA_window_length);
+[ma_freq_domain_6, ma_PSD_2_m10dB] = MA_function(noisy_signal_2_m10dB, fs, MA_window_length);
 
 % Plot for Signal 1 with SNR = 10dB
 figure(25);
-plot(ma_freq_domain_1, ma_power_1_10dB, 'Color', 'cyan');
+plot(ma_freq_domain_1, ma_PSD_1_10dB, 'Color', 'cyan');
 hold on
-plot(-ma_freq_domain_1, ma_power_1_10dB, 'Color', 'cyan');
+plot(-ma_freq_domain_1, ma_PSD_1_10dB, 'Color', 'cyan');
 title('Moving Average Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -316,9 +316,9 @@ legend('Signal 1 with SNR = 10dB')
 
 % Plot for Signal 1 with SNR = 0dB
 figure(26);
-plot(ma_freq_domain_2, ma_power_1_0dB, 'Color', 'cyan');
+plot(ma_freq_domain_2, ma_PSD_1_0dB, 'Color', 'cyan');
 hold on
-plot(-ma_freq_domain_2, ma_power_1_0dB, 'Color', 'cyan');
+plot(-ma_freq_domain_2, ma_PSD_1_0dB, 'Color', 'cyan');
 title('Moving Average Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -326,9 +326,9 @@ legend('Signal 1 with SNR = 0dB')
 
 % Plot for Signal 1 with SNR = -10dB
 figure(27);
-plot(ma_freq_domain_3, ma_power_1_m10dB, 'Color', 'cyan');
+plot(ma_freq_domain_3, ma_PSD_1_m10dB, 'Color', 'cyan');
 hold on
-plot(-ma_freq_domain_3, ma_power_1_m10dB, 'Color', 'cyan');
+plot(-ma_freq_domain_3, ma_PSD_1_m10dB, 'Color', 'cyan');
 title('Moving Average Method Result for Signal 1 ( sin(2 * pi * 100 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -336,9 +336,9 @@ legend('Signal 1 with SNR = -10dB')
 
 % Plot for Signal 2 with SNR = 10dB
 figure(28);
-plot(ma_freq_domain_4, ma_power_2_10dB, 'Color', 'cyan');
+plot(ma_freq_domain_4, ma_PSD_2_10dB, 'Color', 'cyan');
 hold on
-plot(-ma_freq_domain_4, ma_power_2_10dB, 'Color', 'cyan');
+plot(-ma_freq_domain_4, ma_PSD_2_10dB, 'Color', 'cyan');
 title('Moving Average Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -346,9 +346,9 @@ legend('Signal 2 with SNR = 10dB')
 
 % Plot for Signal 2 with SNR = 0dB
 figure(29);
-plot(ma_freq_domain_5, ma_power_2_0dB, 'Color', 'cyan');
+plot(ma_freq_domain_5, ma_PSD_2_0dB, 'Color', 'cyan');
 hold on
-plot(-ma_freq_domain_5, ma_power_2_0dB, 'Color', 'cyan');
+plot(-ma_freq_domain_5, ma_PSD_2_0dB, 'Color', 'cyan');
 title('Moving Average Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = 0dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
@@ -356,15 +356,17 @@ legend('Signal 2 with SNR = 0dB')
 
 % Plot for Signal 2 with SNR = -10dB
 figure(30);
-plot(ma_freq_domain_6, ma_power_2_m10dB, 'Color', 'cyan');
+plot(ma_freq_domain_6, ma_PSD_2_m10dB, 'Color', 'cyan');
 hold on
-plot(-ma_freq_domain_6, ma_power_2_m10dB, 'Color', 'cyan');
+plot(-ma_freq_domain_6, ma_PSD_2_m10dB, 'Color', 'cyan');
 title('Moving Average Method Result for Signal 2 ( sin(2 * pi * 150 * t) ) with SNR = -10dB');
 xlabel('Frequency (Hz)');
 ylabel('Power (dB)')
 legend('Signal 2 with SNR = -10dB')
 
-function [freq_domain, MA_power_dB] = MA_function(signal, fs, window_length)
+
+
+function [freq_domain, MA_PSD_dB] = MA_function(signal, fs, window_length)
     % Length of the signal
     N = length(signal);
 
@@ -389,11 +391,11 @@ function [freq_domain, MA_power_dB] = MA_function(signal, fs, window_length)
     freq_domain =  (0:(fft_length/2)-1) * (fs / (fft_length));
     
     % Normalized PSD estimation in decibels
-    MA_power_dB = 10 * log10(PSD / max(PSD));
-    MA_power_dB = MA_power_dB(1:length(MA_power_dB) / 2);
+    MA_PSD_dB = 10 * log10(PSD / max(PSD));
+    MA_PSD_dB = MA_PSD_dB(1:length(MA_PSD_dB) / 2);
 end
 
-function [freq_domain, AR_power_dB] = AR_function(signal, fs, order)
+function [freq_domain, AR_PSD_dB] = AR_function(signal, fs, order)
     % Length of the signal
     N = length(signal);
     
@@ -425,12 +427,38 @@ function [freq_domain, AR_power_dB] = AR_function(signal, fs, order)
     PSD_estimation = variance ./ abs(transfer_function).^2;
     PSD_estimation = PSD_estimation(1 : length(PSD_estimation) / 2);
     
-    AR_power_dB = 10 * log10(PSD_estimation / max(PSD_estimation));
+    AR_PSD_dB = 10 * log10(PSD_estimation / max(PSD_estimation));
     % Half of the frequency domain
     freq_domain = freq_domain(1:length(freq_domain) / 2);
 end
 
-function [freq_domain, blackman_power_dB] = blackman_tukey_function(signal,fs,window_length,nooverlap)
+function [freq_domain,capon_PSD_dB] = capons_function(signal,fs,window_length)
+% Length of the signal
+N = length(signal);
+
+freq_domain = (0:N/2-1) * fs / N;
+
+% Finding the autocorrelation matrix and its eigenvalues
+correlation_array = xcorr(signal(1:window_length),signal(1:window_length));
+matrix_length = length(correlation_array);
+Rxx = toeplitz(correlation_array((matrix_length+1)/2 : end));
+[V,D]=eig(Rxx);
+
+% Finding beta
+beta = 1 ./ (abs(diag(D))+eps);
+
+% Finding the remaining part of the denominator
+W = abs(fft(V,N)).^2;
+
+% Estimating the PSD
+capon_PSD_estimation = fftshift( 1 ./ (W * beta));
+capon_PSD_estimation=capon_PSD_estimation(N/2+1:end)';
+
+% Normalized PSD estimation in decibels
+capon_PSD_dB = 10 *log10(capon_PSD_estimation / max(capon_PSD_estimation));
+end
+
+function [freq_domain, blackman_PSD_dB] = blackman_tukey_function(signal,fs,window_length,nooverlap)
     % Length of the signal
     N = length(signal);
     
@@ -462,11 +490,11 @@ function [freq_domain, blackman_power_dB] = blackman_tukey_function(signal,fs,wi
     blackman_power = blackman_power / number_of_windows;
     
     % Normalized decibel values of the PSD
-    blackman_power_dB = 10 * log10(blackman_power / max(blackman_power));
-    blackman_power_dB = blackman_power_dB(1:length(blackman_power_dB)/2);
+    blackman_PSD_dB = 10 * log10(blackman_power / max(blackman_power));
+    blackman_PSD_dB = blackman_PSD_dB(1:length(blackman_PSD_dB)/2);
 end
 
-function [freq_domain, welch_power_dB] = welchs_function(signal, fs, window_length, nooverlap)
+function [freq_domain, welch_PSD_dB] = welchs_function(signal, fs, window_length, nooverlap)
     % Length of the signal
     N = length(signal);
     
@@ -497,11 +525,11 @@ function [freq_domain, welch_power_dB] = welchs_function(signal, fs, window_leng
     end
     
     % Normalized decibel values of the total power
-    welch_power_dB = 10 * log10(total_power / max(total_power));    
+    welch_PSD_dB = 10 * log10(total_power / max(total_power));    
 
 end
 
-function [freq_domain, perio_power_dB] = periodogram_function(signal, fs)
+function [freq_domain, perio_PSD_dB] = periodogram_function(signal, fs)
     % Length of the signal
     N = length(signal);
     
@@ -515,6 +543,6 @@ function [freq_domain, perio_power_dB] = periodogram_function(signal, fs)
     power_spectrum = (1 / N) * abs(signal_fourier(1:N/2)).^2;
     
     % Normalized decibel values of the power spectrum 
-    perio_power_dB = 10 * log10(power_spectrum / max(power_spectrum));
+    perio_PSD_dB = 10 * log10(power_spectrum / max(power_spectrum));
 end
 
