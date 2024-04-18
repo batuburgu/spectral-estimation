@@ -157,7 +157,7 @@ xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
 legend('Signal 2 with SNR = -10dB')
 
-Blackman-Tukey Calculations
+% Blackman-Tukey Calculations
 [blackman_freq_domain_1, blackman_power_1_10dB] = blackman_tukey_function(noisy_signal_1_10dB, fs, blackman_window_length, blackman_window_length/2);
 [blackman_freq_domain_2, blackman_power_1_0dB] = blackman_tukey_function(noisy_signal_1_0dB, fs, blackman_window_length, blackman_window_length/2);
 [blackman_freq_domain_3, blackman_power_1_m10dB] = blackman_tukey_function(noisy_signal_1_m10dB, fs, blackman_window_length, blackman_window_length/2);
@@ -226,7 +226,7 @@ xlabel('Frequency (Hz)');
 ylabel('Power (dB)');
 legend('Signal 1 with SNR = -10dB')
 
-AR (Autoregressive) Model Calculations
+% AR (Autoregressive) Model Calculations
 [ar_freq_domain_1, ar_power_1_10dB] = AR_function(noisy_signal_1_10dB, fs, ar_order);
 [ar_freq_domain_2, ar_power_1_0dB] = AR_function(noisy_signal_1_0dB, fs, ar_order);
 [ar_freq_domain_3, ar_power_1_m10dB] = AR_function(noisy_signal_1_m10dB, fs, ar_order);
